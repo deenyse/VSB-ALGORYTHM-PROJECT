@@ -2,14 +2,6 @@
 #include <iostream>
 using namespace std;
 
-int countDigits(int number) {
-    int count = 0;
-    while (number != 0) {
-        number /= 10;
-        ++count;
-    }
-    return count;
-}
 double pows(double base, int exponent) {
     if (exponent == 0)
         return 1;
@@ -29,12 +21,14 @@ double pows(double base, int exponent) {
 Polynomial::Polynomial(double * coefficients, int length){
     this->coefficients = coefficients;
     this->length = length;
+    this->degree = this->countDegree();
 }
 
 Polynomial::Polynomial(double a){
     this->coefficients = new double [1];
     this->coefficients[0] = a;
     this->length = 1;
+    this->degree = 0;
 };
 
 Polynomial::~Polynomial(){
@@ -43,25 +37,11 @@ Polynomial::~Polynomial(){
 
 
 Polynomial*  Polynomial::draw() {
-    for (int i = this->length -1; i > 1; i--) { // do not process 0 and 1 - unneccessary operation becouse lats digit dont have pow
-        if (this->coefficients[i] == 0) // do not process zero coefficient
-            continue;
-
-        if (abs(this->coefficients[i]) != 1)
-            for (int j = 0; j < countDigits(this->coefficients[i]); j++) // space for number
-                cout << " ";
-
-        if (i != this->length -1 || this->coefficients[i] <0) // space for sing
-            cout << " ";
-
-        cout << " " << i;
-    }
-    cout << endl;
     for (int i = this->length -1; i>= 0; i--) {
         if (!this->coefficients[i]) // do not process zero
             continue;
 
-        if (this->coefficients[i] > 0 && i != this->length -1)
+        if (this->coefficients[i] > 0 && i != this->getDegree())
             cout << "+";
 
         if (this->coefficients[i] < 0)
@@ -72,13 +52,15 @@ Polynomial*  Polynomial::draw() {
 
         if (i != 0)
             cout << "x";
+        if (abs(i) != 1 && i != 0 )
+            cout << "^" << i;
 
-        for (int j = 0; j < countDigits(i); j++) // add space for degree
-            cout << " ";
+        cout << " ";
 
     }
-    cout << endl;
 
+
+    cout << endl;
     return this;
 }
 
@@ -90,4 +72,12 @@ long double Polynomial::value(double x) {
     }
 
     return acc;
+}
+
+int Polynomial::countDegree(){
+    int i = this->length -1;
+    while (this->coefficients[i] == 0 && i > 0)
+        --i;
+
+    return i;
 }
