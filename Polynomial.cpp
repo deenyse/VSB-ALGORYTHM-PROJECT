@@ -30,12 +30,19 @@ Polynomial::Polynomial(double * coefficients, int length){
     this->coefficients = coefficients;
     this->length = length;
 }
+
+Polynomial::Polynomial(double a){
+    this->coefficients = new double [1];
+    this->coefficients[0] = a;
+    this->length = 1;
+};
+
 Polynomial::~Polynomial(){
     delete[] coefficients;
 }
 
 
-void Polynomial::draw() {
+Polynomial*  Polynomial::draw() {
     for (int i = this->length -1; i > 1; i--) { // do not process 0 and 1 - unneccessary operation becouse lats digit dont have pow
         if (this->coefficients[i] == 0) // do not process zero coefficient
             continue;
@@ -72,6 +79,7 @@ void Polynomial::draw() {
     }
     cout << endl;
 
+    return this;
 }
 
 long double Polynomial::value(double x) {

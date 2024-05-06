@@ -45,12 +45,10 @@ int main() {
 //    cout << "Degree: " << myPolynomial->degree() << endl;
 //    cout << "Value: " << myPolynomial->value(2) << endl;
 
-    double b [12] = {1,0,0,0,1};
-    Polynomial* myPolynomial1 = new Polynomial(b,5);
+    Polynomial* myPolynomial1 = new Polynomial(5);
     myPolynomial1->draw();
 
-    auto aa = diffPolynomial(myPolynomial, myPolynomial1);
-    aa->draw();
+    Polynomial* aa = diffPolynomial(myPolynomial, myPolynomial1)->draw();
 
     return 0;
 }
