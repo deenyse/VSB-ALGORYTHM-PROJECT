@@ -1,7 +1,6 @@
 #ifndef ALGORYTHM_PROJECT_POLYNOMIAL_H
 #define ALGORYTHM_PROJECT_POLYNOMIAL_H
 
-
 class Polynomial {
 private:
     double* coefficients;
@@ -12,7 +11,6 @@ public:
     Polynomial(double a);
     ~Polynomial();
     double *getCoefficients() {return coefficients;}
-    int getLength() {return length;}
     int getDegree() {return degree;}
     virtual Polynomial* draw();
     int countDegree();

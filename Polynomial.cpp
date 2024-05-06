@@ -31,10 +31,10 @@ Polynomial::Polynomial(double a){
     this->degree = 0;
 };
 
-Polynomial::~Polynomial(){
-    delete[] coefficients;
-}
 
+Polynomial::~Polynomial(){
+    delete[] this->coefficients;
+}
 
 Polynomial*  Polynomial::draw() {
     for (int i = this->length -1; i>= 0; i--) {

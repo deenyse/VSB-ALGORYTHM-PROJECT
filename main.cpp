@@ -66,17 +66,39 @@ Polynomial * integratePolynomial(Polynomial *a){
 }
 
 int main() {
-    double a [12] = {-6,7,-9,0,1};
-    Polynomial* myPolynomial = new Polynomial(a,5);
+    double a [] = {0,2,-0.5,0};
+    Polynomial* myPolynomial = new Polynomial(a,4);
+    cout << "First Polynomial" << endl;
     myPolynomial->draw();
-//    cout << "Value: " << myPolynomial->value(2) << endl;
+    cout << "Value of first polynomial at point 3 is: " << myPolynomial->value(3) << endl;
+    cout << "Degree of first polynomial is: " << myPolynomial->getDegree() << endl;
 
-    double b[12] = {-1,0,1,0,0,0};
+    double b[12] = {-1,0,1,0,0,2};
     Polynomial* myPolynomial1 = new Polynomial(b,6);
+    cout << "Second Polynomial" << endl;
     myPolynomial1->draw();
 
-    auto bb = diffPolynomial(sumPolynomial(myPolynomial1, myPolynomial), myPolynomial)->draw();
+    cout << "Difference betwen second and first polynomials is:" << endl;
+    Polynomial* aa = diffPolynomial(myPolynomial1, myPolynomial)->draw();
 
-//    Polynomial* aa = integratePolynomial(derivatePolynomial(myPolynomial1->draw())->draw())->draw();
+    cout << "Sum between difference and first polynomial is:" << endl;
+    sumPolynomial(aa, myPolynomial)->draw();
+
+    cout << "Third Polynomial (created by 1 number)" << endl;
+    Polynomial* myPolynomial2 = new Polynomial(4);
+    myPolynomial2->draw();
+
+    cout << "Multiplication of third and first polynomials is:" << endl;
+    Polynomial* bb = multiplyPolynomial(myPolynomial, myPolynomial2)->draw();
+
+    cout << "Multiplication of second and first polynomials is:" << endl;
+    Polynomial* cc = multiplyPolynomial(myPolynomial1, myPolynomial)->draw();
+
+    cout << "Derivation of second polinomial" << endl;
+    Polynomial* dd = derivatePolynomial(myPolynomial1)->draw();
+
+    cout << "One of many Integrations of derivation of second polinomial" << endl;
+    Polynomial* ee = integratePolynomial(dd)->draw();
+
     return 0;
 }
